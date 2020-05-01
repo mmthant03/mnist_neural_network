@@ -2,6 +2,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 import scipy.optimize
 
+data_path = "./data/"
+
 NUM_INPUT = 784  # Number of input neurons
 NUM_HIDDEN = 40  # Number of hidden neurons
 NUM_OUTPUT = 10  # Number of output neurons
@@ -21,8 +23,8 @@ def pack (W1, b1, W2, b2):
 
 # Load the images and labels from a specified dataset (train or test).
 def loadData (which):
-    images = np.load("mnist_{}_images.npy".format(which))
-    labels = np.load("mnist_{}_labels.npy".format(which))
+    images = np.load("{}mnist_{}_images.npy".format(data_path,which))
+    labels = np.load("{}mnist_{}_labels.npy".format(data_path,which))
     return images, labels
 
 # Given training images X, associated labels Y, and a vector of combined weights
