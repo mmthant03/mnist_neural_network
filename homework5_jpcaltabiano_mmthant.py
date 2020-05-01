@@ -33,7 +33,29 @@ def loadData (which):
 # will also need to modify slightly the gradient check code below).
 def fCE (X, Y, w):
     W1, b1, W2, b2 = unpack(w)
+    '''
+    z(1) = W(1)x + b(1)
+    h(1) = relu(z(1)))
+    z(2) = W(2)h(1) + b(2)
+    ^y = g(x) = softmax(z(2))
+    '''
+    z1 = predictor(W1, X, b1)
+    h1 = reLU(z1)
+    z2 = predictor(W2, h1, b2)
+    Yhat = np.softmax(z2)
+    cost = -np.mean(np.log(Yhat[Y==1]))
     return cost
+
+def predictor(W, x, b):
+    z = W.dot(x) + b
+
+def reLU(s):
+    if s >= 0: return s
+    return 0
+
+def softmax(z):
+    e_z = np.exp(z - np.max(z))
+    return e_z/e_z.sum()
 
 # Given training images X, associated labels Y, and a vector of combined weights
 # and bias terms w, compute and return the gradient of fCE. You might
